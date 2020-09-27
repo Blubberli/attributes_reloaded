@@ -15,35 +15,19 @@ from sklearn.metrics import classification_report
 import re
 
 
-def get_ranks_per_attribute(ranker, save_path):
-    """
-    Given a ranker and a path, compute the rank measures for each label
-    :param ranker: a ranker that contains the predicted labels and the true labels
-    :param save_path: a path to store the results at
-    """
-    attribute2ranks = defaultdict(list)
-    for i in range(len(ranker.true_labels)):
-        attribute2ranks[ranker.true_labels[i]].append(ranker.ranks[i])
-    file = open(save_path + "_attribute_ranks.csv", "w")
-    for attribute, ranks in attribute2ranks.items():
-        p1 = NearestNeigbourRanker.precision_at_rank(k=1, ranks=ranks)
-        p3 = NearestNeigbourRanker.precision_at_rank(k=3, ranks=ranks)
-        file.write("%s\t%.2f\t%.2f" % (attribute, p1, p3))
-        file.write("\n")
-
-
-def performance_per_attribute(ranker, save_path):
+def performance_per_attribute(gold_labels, predicted_labels, ranks, target_rank, save_path):
     """
     Given a ranker for a test dataset and a path create a classification report, each attribute will have the score
     and the averaged micro and weighted F1 will also be reported
     """
-    gold_labels = ranker.true_labels
-    predicted_labels = ranker.predicted_labels
+    for i in range(len(ranks)):
+        rank = ranks[i]
+        if rank <= target_rank:
+            predicted_labels[i] = gold_labels[i]
     labels_in_test = list(set(gold_labels))
     report = classification_report(y_true=gold_labels, y_pred=predicted_labels, labels=labels_in_test, output_dict=True,
                                    zero_division=0)
     pd.DataFrame(report).round(decimals=3).transpose().to_csv(save_path + "_classification_report.csv", sep="\t")
-    get_ranks_per_attribute(ranker, save_path)
 
 
 def performance_per_phrase_type(ranker, testset, save_path):
@@ -51,19 +35,18 @@ def performance_per_phrase_type(ranker, testset, save_path):
     predictions_free = [ranker.predicted_labels[i] for i in range(len(phrase_type)) if phrase_type[i] == "free"]
     predictions_colloc = [ranker.predicted_labels[i] for i in range(len(phrase_type)) if
                           phrase_type[i] == "collocation"]
+    ranks_free = [ranker.ranks[i] for i in range(len(phrase_type)) if phrase_type[i] == "free"]
+    ranks_colloc = [ranker.ranks[i] for i in range(len(phrase_type)) if phrase_type[i] == "collocation"]
     gold_labels_free = [ranker.true_labels[i] for i in range(len(phrase_type)) if phrase_type[i] == "free"]
     gold_labels_colloc = [ranker.true_labels[i] for i in range(len(phrase_type)) if phrase_type[i] == "collocation"]
-    report_free = classification_report(y_true=gold_labels_free, y_pred=predictions_free,
-                                        labels=list(set(gold_labels_free)),
-                                        output_dict=True, zero_division=0)
-    report_colloc = classification_report(y_true=gold_labels_colloc, y_pred=predictions_colloc,
-                                          labels=list(set(gold_labels_colloc)),
-                                          output_dict=True, zero_division=0)
-    pd.DataFrame(report_free).round(decimals=3).transpose().to_csv(save_path + "freephrase_classification_report.csv",
-                                                                   sep="\t")
-    pd.DataFrame(report_colloc).round(decimals=3).transpose().to_csv(
-        save_path + "collocations_classification_report.csv",
-        sep="\t")
+    performance_per_attribute(gold_labels=gold_labels_free, predicted_labels=predictions_free, ranks=ranks_free,
+                              save_path=save_path + "free_rank1", target_rank=1)
+    performance_per_attribute(gold_labels=gold_labels_free, predicted_labels=predictions_free, ranks=ranks_free,
+                              save_path=save_path + "free_rank3", target_rank=3)
+    performance_per_attribute(gold_labels=gold_labels_colloc, predicted_labels=predictions_colloc, ranks=ranks_colloc,
+                              save_path=save_path + "collocations_rank1", target_rank=1)
+    performance_per_attribute(gold_labels=gold_labels_colloc, predicted_labels=predictions_colloc, ranks=ranks_colloc,
+                              save_path=save_path + "collocations_rank3", target_rank=3)
 
 
 def get_nearest_neighbours_for_given_list(vector, vector_list, index2label):
@@ -193,6 +176,9 @@ if __name__ == '__main__':
     argp = argparse.ArgumentParser()
     argp.add_argument("config", help="the path to evaluation config")
     argp.add_argument("--n", help="if nearest neighbours should be created for every phrase", action="store_true")
+    argp.add_argument("--phrase-type",
+                      help="if flag is set to true, compute classification reports for each phrase type",
+                      action="store_true")
     argp = argp.parse_args()
 
     # config mit static or contextualised
@@ -231,8 +217,13 @@ if __name__ == '__main__':
     save_labels(np.array(ranker_attribute.predicted_labels), save_path + "/predicted_labels.txt")
 
     save_results(ranker_attribute, save_path + "/test_scores.txt")
-    performance_per_attribute(ranker=ranker_attribute,
-                              save_path=save_path + "/_test_")
+    performance_per_attribute(gold_labels=ranker_attribute.true_labels,
+                              predicted_labels=ranker_attribute.predicted_labels, ranks=ranker_attribute.ranks,
+                              target_rank=1, save_path=save_path + "/attributes_rank1")
+    performance_per_attribute(gold_labels=ranker_attribute.true_labels,
+                              predicted_labels=ranker_attribute.predicted_labels, ranks=ranker_attribute.ranks,
+                              target_rank=3, save_path=save_path + "/attributes_rank3")
+
     performance_per_phrase_type(ranker=ranker_attribute, save_path=save_path + "/test_", testset=dataset)
 
     performance_per_adjective(ranker=ranker_attribute, save_path=save_path + "/_test_")
