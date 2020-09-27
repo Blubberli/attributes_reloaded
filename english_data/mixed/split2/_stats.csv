@@ -1,0 +1,9 @@
+attribute	frequency	adjectives
+emotion	42	{'fiery', 'sore', 'cheery', 'dark', 'enjoyable', 'unhappy', 'hot', 'amusing', 'proud', 'genial', 'fascinating', 'cordial', 'atrocious', 'bitter', 'exciting', 'sardonic', 'happy', 'grim', 'creepy', 'breathtaking', 'nasty', 'cheerful', 'grisly', 'uncomfortable', 'warm', 'gruesome', 'cool', 'affable', 'grievous', 'sunny', 'macabre'}
+quantity	30	{'big', 'major', 'abundant', 'meager', 'many', 'short', 'large', 'minuscule', 'inadequate', 'minor', 'poor', 'few', 'comfortable', 'sufficient', 'plentiful', 'abnormal', 'low', 'generous', 'enough', 'ample', 'paltry', 'scanty'}
+certainty	22	{'inconclusive', 'underhand', 'obvious', 'confusing', 'axiomatic', 'credible', 'evident', 'vivid', 'clear', 'determinate', 'conclusive', 'silent', 'explicit', 'clear-cut', 'implicit', 'uncertain'}
+importance	22	{'big', 'crucial', 'critical', 'slight', 'fundamental', 'vital', 'cardinal', 'important', 'monumental', 'prominent', 'significant', 'staple', 'salient', 'central', 'grave', 'serious', 'essential'}
+evaluation	30	{'valuable', 'pleasant', 'evil', 'ominous', 'awful', 'precious', 'bright', 'beautiful', 'exemplary', 'dreadful', 'superior', 'poor', 'awkward', 'auspicious', 'sacred', 'laudable', 'high', 'good', 'ill', 'benign', 'worthwhile', 'negative', 'solid'}
+intensity	80	{'big', 'excessive', 'mild', 'powerful', 'exorbitant', 'massive', 'utmost', 'supreme', 'reasonable', 'exceptional', 'total', 'desperate', 'sound', 'deep', 'terrific', 'intense', 'outrageous', 'ultimate', 'dire', 'high', 'low', 'extreme', 'moderate', 'bad', 'extraordinary', 'critical', 'overwhelming', 'exquisite', 'incredible', 'immoderate', 'great', 'flagrant', 'striking'}
+character	12	{'bubbly', 'disobedient', 'willing', 'dutiful', 'benign', 'obedient', 'bold', 'responsible', 'timid', 'courageous', 'sensible', 'spoiled'}
+function	8	{'effective', 'potent', 'powerful', 'handy', 'useful', 'extinct'}

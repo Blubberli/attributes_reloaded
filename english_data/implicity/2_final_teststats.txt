@@ -1,0 +1,2 @@
+14 distinct attributes in validation, 65 distinct adjectives in validation, 137 distinct nouns in validation
+14 distinct attributes in test, 70 distinct adjectives in test, 158 distinct nouns in test

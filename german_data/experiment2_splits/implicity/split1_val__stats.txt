@@ -1,0 +1,13 @@
+shared adjectives between train and test : 0
+shared nouns between train and test : 0
+
+number of distinct modifier in train : 1868
+number of distinct heads in train :12384
+number of distinct attributes in train : 46
+
+number of distinct modifier in test :22
+number of distinct heads in test: 325
+number of distinct attributes in test :12
+
+test data size : 368
+training data size : 57151

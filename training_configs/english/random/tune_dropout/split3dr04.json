@@ -1,0 +1,34 @@
+{
+  "train_data_path": "/home/neele/attributes_reloaded/english_data/final_splits/split3/train_small.txt",
+  "validation_data_path": "/home/neele/attributes_reloaded/english_data/final_splits/split3/val.txt",
+  "test_data_path": "/home/neele/attributes_reloaded/english_data/final_splits/split3/test.txt",
+  "logging_path": "/home/neele/attributes_reloaded/output/english/random/tune_dropout",
+  "save_name": "split3_dr04",
+  "model_path": "/home/neele/attributes_reloaded/output/english/trained_models/",
+  "eval_on_test": false,
+  "data_loader": {
+    "sep": " ",
+    "label": "attribute",
+    "modifier": "adjective",
+    "head": "noun"
+  },
+  "model": {
+    "type": "tw_single",
+    "dropout": 0.4,
+    "input_dim": 300,
+    "transformations": 100,
+    "normalize_embeddings": true
+  },
+  "feature_extractor": {
+    "general_embeddings": "/home/neele/attributes_reloaded/eacl_embeddings/english-skipgram-mincount-50-ctx-10-ns-5-dims-300.fifu",
+    "label_embeddings": "/home/neele/attributes_reloaded/eacl_embeddings/english_attribute_definition.fifu"
+  },
+  "iterator": {
+    "type": "basic",
+    "batch_size": 32
+  },
+  "num_epochs": 75,
+  "patience": 3,
+  "seed": 1,
+  "validation_metric" : "f1"
+}

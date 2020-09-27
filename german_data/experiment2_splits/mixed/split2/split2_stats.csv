@@ -1,0 +1,9 @@
+attribute	frequency	adjectives
+Charakter	44	{'rau', 'aggressiv', 'frech', 'zäh', 'sanft', 'stürmisch', 'hart', 'sicher', 'freundlich', 'stark', 'wild', 'zart'}
+Kraft	40	{'einflussreich', 'stark', 'mächtig'}
+Menge	70	{'knapp', 'reich', 'karg', 'hell'}
+Dimension	78	{'sanft', 'dick', 'steil', 'knapp', 'mächtig'}
+Gesellschaft	170	{'frei', 'offen', 'schwarz', 'arm', 'reich'}
+Bewertung	84	{'dumm', 'herrlich', 'rund', 'schrecklich', 'hell', 'süß', 'wundervoll', 'dunkel'}
+Klima	64	{'stürmisch', 'windig', 'karg', 'rau'}
+Zeit	138	{'jetzig', 'baldig', 'historisch', 'frischgebacken', 'alt', 'abendlich', 'spät', 'scharf'}

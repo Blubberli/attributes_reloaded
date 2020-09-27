@@ -1,0 +1,25 @@
+{
+  "train_data_path": "/home/neele/attributes_reloaded/german_data/experiment2_splits/mixed/split2/train.txt",
+  "validation_data_path": "/home/neele/attributes_reloaded/german_data/experiment2_splits/mixed/split2/val.txt",
+  "test_data_path": "/home/neele/attributes_reloaded/german_data/experiment2_splits/mixed/split2/test.txt",
+  "save_path": "/home/neele/attributes_reloaded/output/german/eval_results/experiment2/mixed/split2",
+  "model_path": "/home/neele/attributes_reloaded/output/german/trained_models/split2_2020-09-14-13_07_59",
+  "eval_on_test": false,
+  "data_loader": {
+    "sep": " ",
+    "label": "attribute",
+    "modifier": "adjective",
+    "head": "noun"
+  },
+  "model": {
+    "type": "tw_single",
+    "dropout": 0.4,
+    "input_dim": 300,
+    "transformations": 50,
+    "normalize_embeddings": true
+  },
+  "feature_extractor": {
+    "general_embeddings": "/home/neele/attributes_reloaded/eacl_embeddings/german-skipgram.fifu",
+    "label_embeddings": "/home/neele/attributes_reloaded/eacl_embeddings/attribute_definitions.fifu"
+  }
+}
