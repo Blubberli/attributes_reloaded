@@ -12,10 +12,10 @@ def predict(test_loader):
     averages = []
     adjectives = []
     nouns = []
-    for m, h in zip(data_all["w1"], data_all["w2"]):
+    for m, h in zip(data_all["modifier_rep"], data_all["head_rep"]):
         averages.append(np.mean((np.array(m), np.array(h)), axis=0))
-        adjectives.append(data_all["w1"])
-        nouns.append(data_all["w2"])
+        adjectives.append(data_all["modifier_rep"])
+        nouns.append(data_all["head_rep"])
     return adjectives, nouns, averages
 
 
